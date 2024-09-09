@@ -3,7 +3,6 @@ import { render, fireEvent } from "@testing-library/react";
 import CitySearch from "../components/city-search";
 import userEvent from "@testing-library/user-event";
 import {extractLocations, getEvents} from "../api";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 global.MutationObserver = class {
   constructor(callback) {
