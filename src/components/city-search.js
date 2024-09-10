@@ -1,19 +1,25 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CitySearch = ({allLocations}) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
-    const handleInputchanged = (event) => {
-        const value = event.target.value;
-        const filteredLocations = allLocations ? allLocations.filter((location) => {
-            return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-        }) : [];
+    useEffect(() => {
+      if (allLocations.length > 0) {
+        setSuggestions(allLocations);
+      }
+    }, [JSON.stringify(allLocations)]);
 
-        setQuery(value);
-        setSuggestions(filteredLocations);
+    const handleInputchanged = (event) => {
+      const value = event.target.value;
+      const filteredLocations = allLocations ? allLocations.filter((location) => {
+        return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
+      }) : [];
+  
+      setQuery(value);
+      setSuggestions(filteredLocations);
     }
 
     const handleItemClicked = (event) => {
