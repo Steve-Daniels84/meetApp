@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, describe, beforeEach, expect, test } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import NumberOfEvents from "../components/NumberOfEvents";
 
 describe("<NumberOfEvents /> component", () => {
