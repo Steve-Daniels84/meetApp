@@ -86,7 +86,7 @@ describe("<CitySearch /> component", () => {
   test("renders the suggestion box content in the textbox upon clicking on a suggestion", async () => {
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} setCurrentCity={() => { }}/>);
 
     // Simulate user input in the textbox
     const cityTextBox = CitySearchComponent.getByRole("textbox");
