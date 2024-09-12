@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentCity]);
 
   const fetchData = async () => {
     const allEvents = await getEvents();
