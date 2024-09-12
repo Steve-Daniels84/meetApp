@@ -8,7 +8,11 @@ export const extractLocations = (events) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const checkToken = async (accessToken) => {
+=======
+const checkToken = async (accessToken) => {
+>>>>>>> parent of c71c51d8 (Update api.js)
   const response = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   );
@@ -16,7 +20,7 @@ export const checkToken = async (accessToken) => {
   return result;
 };
 
-export const removeQuery = () => {
+const removeQuery = () => {
   let newurl;
   if (window.history.pushState && window.location.pathname) {
     newurl =
@@ -53,24 +57,28 @@ export const getEvents = async () => {
   }
 };
 
+<<<<<<< HEAD
 export const getAccessToken = async () => {             
   const accessToken = localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
+=======
+>>>>>>> parent of c71c51d8 (Update api.js)
 
-  if (!accessToken || tokenCheck.error) {
-    await localStorage.removeItem("access_token");
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get("code");
-    if (!code) {
-      const response = await fetch(
-        "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/get-auth-url"
-      );
-      const result = await response.json();
-      const { authUrl } = result;
-      return (window.location.href = authUrl);
-    }
-    return code && getToken(code);
+const tokenCheck = accessToken && (await checkToken(accessToken));
+
+if (!accessToken || tokenCheck.error) {
+  await localStorage.removeItem("access_token");
+  const searchParams = new URLSearchParams(window.location.search);
+  const code = await searchParams.get("code");
+  if (!code) {
+    const response = await fetch(
+      "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/get-auth-url"
+    );
+    const result = await response.json();
+    const { authUrl } = result;
+    return (window.location.href = authUrl);
   }
+<<<<<<< HEAD
   return accessToken;
 };
 
@@ -100,3 +108,8 @@ export const getEvents = async () => {
     return mockData
 }
 >>>>>>> parent of 548da68b (api inegration)
+=======
+  return code && getToken(code);
+}
+return accessToken;
+>>>>>>> parent of c71c51d8 (Update api.js)
