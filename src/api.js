@@ -32,9 +32,9 @@ export const removeQuery = () => {
 
 //fetches all events data
 export const getEvents = async () => {
-  if (window.location.href.startsWith("http://localhost")) {
-    return mockData;
-  }
+//   if (window.location.href.startsWith("http://localhost")) {
+//     return mockData;
+//   }
 
   const token = await getToken();
 
