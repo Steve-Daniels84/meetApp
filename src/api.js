@@ -2,11 +2,12 @@ import mockData from "./mock-data";
 
 //takes events data and processes it for further use
 export const extractLocations = (events) => {
-  const extractedLocations = events.map((event) => event.location);
-  const locations = [...new Set(extractedLocations)];
-  return locations;
+    const extractedLocations = events.map((event) => event.location);
+    const locations = [...new Set(extractedLocations)];
+    return locations;
 };
 
+<<<<<<< HEAD
 export const checkToken = async (accessToken) => {
   const response = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
@@ -92,3 +93,10 @@ const getToken = async (code) => {
     return error;
   }
 }; 
+=======
+
+//fetches all events data
+export const getEvents = async () => {
+    return mockData
+}
+>>>>>>> parent of 548da68b (api inegration)
