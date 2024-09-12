@@ -52,7 +52,7 @@ export const getEvents = async () => {
   }
 };
 
-export const getAccessToken = async () => {
+export const getToken = async () => {
   const accessToken = localStorage.getItem("access_token");
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
