@@ -6,16 +6,8 @@ export const extractLocations = (events) => {
   const locations = [...new Set(extractedLocations)];
   return locations;
 };
-
-const checkToken = async (accessToken) => {
-  const response = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-  );
-  const result = await response.json();
-  return result;
-};
-
-const removeQuery = () => {
+ 
+export const removeQuery = () => {
   let newurl;
   if (window.history.pushState && window.location.pathname) {
     newurl =
@@ -28,6 +20,14 @@ const removeQuery = () => {
     newurl = window.location.protocol + "//" + window.location.host;
     window.history.pushState("", "", newurl);
   }
+};
+
+export const checkToken = async (accessToken) => {
+  const response = await fetch(
+    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+  );
+  const result = await response.json();
+  return result;
 };
 
 //fetches all events data
@@ -52,21 +52,34 @@ export const getEvents = async () => {
   }
 };
 
+export const getAccessToken = async () => {
+  const accessToken = localStorage.getItem('access_token');
+  const tokenCheck = accessToken && (await checkToken(accessToken));
 
-const tokenCheck = accessToken && (await checkToken(accessToken));
-
-if (!accessToken || tokenCheck.error) {
-  await localStorage.removeItem("access_token");
-  const searchParams = new URLSearchParams(window.location.search);
-  const code = await searchParams.get("code");
-  if (!code) {
-    const response = await fetch(
-      "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/get-auth-url"
-    );
-    const result = await response.json();
-    const { authUrl } = result;
-    return (window.location.href = authUrl);
+  if (!accessToken || tokenCheck.error) {
+    await localStorage.removeItem("access_token");
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = await searchParams.get("code");
+    if (!code) {
+      const response = await fetch(
+        "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/get-auth-url"
+      );
+      const result = await response.json();
+      const { authUrl } = result;
+      return (window.location.href = authUrl);
+    }
+    return code && getToken(code);
   }
-  return code && getToken(code);
+  return accessToken;
 }
-return accessToken;
+
+const getToken = async (code) => {
+  const encodeCode = encodeURIComponent(code);
+  const response = await fetch(
+    'https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/token/{code}' + '/' + encodeCode
+  );
+  const { access_token } = await response.json();
+  access_token && localStorage.setItem("access_token", access_token);
+
+  return access_token;
+};
