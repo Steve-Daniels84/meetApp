@@ -44,6 +44,8 @@ export const getEvents = async () => {
 
   const token = await getAccessToken();
 
+  console.log(token);
+
   if (token) {
     removeQuery();
     const url =  "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/getCalendarEvents/%7Baccess_token%7D" + "/" + token;
