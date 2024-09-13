@@ -20,7 +20,7 @@ const CitySearch = ({allLocations, setCurrentCity}) => {
         const value = event.target.textContent;
         setQuery(value);
         setShowSuggestions(false);
-        // setCurrentCity(value);
+        setCurrentCity(value);
     }
 
     useEffect(() => {
