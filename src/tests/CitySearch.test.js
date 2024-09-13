@@ -15,7 +15,7 @@ global.MutationObserver = class {
 describe("<CitySearch /> component", () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]} />);
+    CitySearchComponent = render(<CitySearch allLocations={[]}  setCurrentCity={() => { }}/>);
   });
 
   test("renders text input", () => {
@@ -44,7 +44,7 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(allEvents);
 
     // Re-render CitySearch component with allLocations
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}  setCurrentCity={() => { }} />);
 
     // Get city text box element
     const cityTextBox = CitySearchComponent.getByRole("textbox");

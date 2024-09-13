@@ -1,16 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const CitySearch = ({allLocations}) => {
+const CitySearch = ({allLocations, setCurrentCity}) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
-    useEffect(() => {
-      if (allLocations.length > 0) {
-        setSuggestions(allLocations);
-      }
-    }, [JSON.stringify(allLocations)]);
 
     const handleInputchanged = (event) => {
       const value = event.target.value;
@@ -26,7 +21,12 @@ const CitySearch = ({allLocations}) => {
         const value = event.target.textContent;
         setQuery(value);
         setShowSuggestions(false);
+        // setCurrentCity(value);
     }
+
+    useEffect(() => {
+   setSuggestions(allLocations)
+    }, [JSON.stringify(allLocations)]);
 
     return (
       <div id="city-search">
