@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const CitySearch = ({allLocations}) => {
+const CitySearch = ({allLocations, setCurrentCity}) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -10,7 +10,7 @@ const CitySearch = ({allLocations}) => {
       if (allLocations.length > 0) {
         setSuggestions(allLocations);
       }
-    }, [JSON.stringify(allLocations)]);
+    }, [allLocations]);
 
     const handleInputchanged = (event) => {
       const value = event.target.value;
