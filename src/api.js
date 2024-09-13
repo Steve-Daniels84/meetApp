@@ -2,9 +2,9 @@ import mockData from "./mock-data";
 
 //takes events data and processes it for further use
 export const extractLocations = (events) => {
-    const extractedLocations = events.map((event) => event.location);
-    const locations = [...new Set(extractedLocations)];
-    return locations;
+  const extractedLocations = events.map((event) => event.location);
+  const locations = [...new Set(extractedLocations)];
+  return locations;
 };
 
 export const getAccessToken = async () => {
@@ -48,7 +48,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url =  "https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/getCalendarEvents" + "/" + token;
+    const url = `https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/getCalendarEvents/${token}`;
     const response = await fetch(url);
     const result = await response.json();
     if (result) {
@@ -60,14 +60,10 @@ export const getEvents = async () => {
 const removeQuery = () => {
   let newurl;
   if (window.history.pushState && window.location.pathname) {
-    newurl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
+    newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
     window.history.pushState("", "", newurl);
   } else {
-    newurl = window.location.protocol + "//" + window.location.host;
+    newurl = `${window.location.protocol}//${window.location.host}`;
     window.history.pushState("", "", newurl);
   }
 };
@@ -75,7 +71,7 @@ const removeQuery = () => {
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const response = await fetch(
-    'https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/token/{code}' + '/' + encodeCode
+    `https://go95ldn5h7.execute-api.eu-west-2.amazonaws.com/dev/api/token/{code}/${encodeCode}`
   );
   const { access_token } = await response.json();
   access_token && localStorage.setItem("access_token", access_token);
