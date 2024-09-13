@@ -6,12 +6,6 @@ const CitySearch = ({allLocations, setCurrentCity}) => {
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
-    useEffect(() => {
-      if (allLocations.length > 0) {
-        setSuggestions(allLocations);
-      }
-    }, [allLocations]);
-
     const handleInputchanged = (event) => {
       const value = event.target.value;
       const filteredLocations = allLocations ? allLocations.filter((location) => {
@@ -30,8 +24,10 @@ const CitySearch = ({allLocations, setCurrentCity}) => {
     }
 
     useEffect(() => {
-   setSuggestions(allLocations)
-    }, [JSON.stringify(allLocations)]);
+      if (allLocations.length > 0) {
+        setSuggestions(allLocations);
+      }
+    }, [allLocations]);
 
     return (
       <div id="city-search">
