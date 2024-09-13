@@ -15,7 +15,7 @@ global.MutationObserver = class {
 describe("<CitySearch /> component", () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]}  setCurrentCity={() => { }}/>);
+    CitySearchComponent = render(<CitySearch allLocations={[]}/>);
   });
 
   test("renders text input", () => {
@@ -44,7 +44,7 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(allEvents);
 
     // Re-render CitySearch component with allLocations
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}  setCurrentCity={() => { }} />);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}/>);
 
     // Get city text box element
     const cityTextBox = CitySearchComponent.getByRole("textbox");
@@ -86,7 +86,11 @@ describe("<CitySearch /> component", () => {
   test("renders the suggestion box content in the textbox upon clicking on a suggestion", async () => {
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+
+    // Create a mock function for setCurrentCity
+    const mockSetCurrentCity = jest.fn();
+
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} setCurrentCity={mockSetCurrentCity}/>);
 
     // Simulate user input in the textbox
     const cityTextBox = CitySearchComponent.getByRole("textbox");
@@ -105,6 +109,9 @@ describe("<CitySearch /> component", () => {
 
     // Assert that the input box value is updated with the suggestion's text
     expect(cityTextBox).toHaveValue(berlinSuggestion.textContent);
+
+    // Assert that setCurrentCity was called with the correct argument
+    expect(mockSetCurrentCity).toHaveBeenCalledWith("Berlin, Germany");
   });
 });
 
