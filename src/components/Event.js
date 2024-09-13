@@ -14,7 +14,7 @@ const Event = ({event}) => {
                 { showDetails ? "Hide details" : "Show details"}
             </button>
             {
-                showDetails ?  <p role="description" className="details">{event.description}</p> : <></>
+                showDetails ?  <p className="details">{event.description}</p> : <></>
             }
         </li>
     );

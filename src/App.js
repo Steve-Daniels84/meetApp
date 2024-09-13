@@ -12,7 +12,7 @@ const App = () => {
   const [allLocations, setAllLocations] = useState([]);
 
   useEffect(() => {
-    fetchData();
+    fetchData;
   }, []);
 
   const fetchData = async () => {

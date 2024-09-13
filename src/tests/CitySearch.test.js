@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, within } from "@testing-library/react";
+import { render, fireEvent, within, waitFor } from "@testing-library/react";
 import CitySearch from "../components/city-search";
 import { extractLocations, getEvents } from "../api";
 import App from "../App";
@@ -15,7 +15,7 @@ global.MutationObserver = class {
 describe("<CitySearch /> component", () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]} />);
+    CitySearchComponent = render(<CitySearch allLocations={[]}  setCurrentCity={() => { }}/>);
   });
 
   test("renders text input", () => {
@@ -44,7 +44,7 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(allEvents);
 
     // Re-render CitySearch component with allLocations
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}  setCurrentCity={() => { }} />);
 
     // Get city text box element
     const cityTextBox = CitySearchComponent.getByRole("textbox");
@@ -116,18 +116,13 @@ describe("<CitySearch /> Integration", () => {
     const CitySearchDom = AppDom.querySelector("#city-search");
     const cityTextBox = within(CitySearchDom).queryByRole("textbox");
 
-    fireEvent.focus(cityTextBox);
-    await within(CitySearchDom).findAllByRole('listitem');
- 
-
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
 
-
-   const suggestionListItems = within(CitySearchDom).queryAllByRole(
-      'listitem'
-    );
-    
-    expect(suggestionListItems.length).toBe(allLocations.length + 1);
+    await waitFor(() => {
+      fireEvent.focus(cityTextBox);
+      const suggestionListItems = within(CitySearchDom).queryAllByRole("listitem");
+      expect(suggestionListItems.length).toBe(allLocations.length + 1);
+    });
   });
 });
