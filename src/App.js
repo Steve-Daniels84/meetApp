@@ -7,9 +7,11 @@ import { extractLocations, getEvents } from '../src/api';
 
 const App = () => {
   const [events, setEvents] = useState([]);
-  const [currentNOE, setCurrentNOE] = useState(32);
+  const [currentNOE, setCurrentNOE] = useState(25);
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
+  const [errorAlert, setErrorAlert] = useState("");
+
 
 
   const fetchData = useCallback(async () => {
@@ -31,7 +33,7 @@ const App = () => {
     <div className="App">
 
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
-      <NumberOfEvents setCurrentNOE={setCurrentNOE} />
+      <NumberOfEvents setCurrentNOE={setCurrentNOE} setErrorAlert={setErrorAlert} errorAlert={errorAlert}/>
       <EventList events={events} />
     </div>
   );

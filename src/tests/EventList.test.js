@@ -4,6 +4,14 @@ import { getEvents } from "../api";
 import EventList from "../components/EventList";
 import App from "../App";
 
+global.MutationObserver = class {
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe() {}
+  disconnect() {}
+};
+
 describe("<EventList /> component", () => {
   let EventListComponent;
   beforeEach(() => {
@@ -24,13 +32,6 @@ describe("<EventList /> component", () => {
 });
 
 describe("<EventList /> Integration", () => {
-  global.MutationObserver = class {
-    constructor(callback) {
-      this.callback = callback;
-    }
-    observe() {}
-    disconnect() {}
-  };
 
   test("renders a list of 32 events when the app is mounted and rendered", async () => {
     const AppComponent = render(<App />);
@@ -42,3 +43,4 @@ describe("<EventList /> Integration", () => {
     });
   });
 });
+

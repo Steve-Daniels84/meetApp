@@ -1,21 +1,19 @@
 import React from "react";
 import { useState } from "react";
 
-const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
-  const [number, setNumber] = useState(32);
+const NumberOfEvents = ({ setCurrentNOE, setErrorAlert, errorAlert }) => {
+  const [number, setNumber] = useState(25);
 
   const handleInputChanged = (e) => {
     let value = e.target.value;
-    if (isNaN(value) || value.length <= 0) {
-      setErrorAlert("Please enter a valid number");
-    } else {
-      setErrorAlert(""); // Clear error message if input is valid
+      setErrorAlert(value);
       setNumber(value);
       setCurrentNOE(value);
-    }
+    
   };
 
   return (
+    <div>
     <div id="numberOfEvents">
       <label htmlFor="number" id="number">
         Number of Events:
@@ -26,6 +24,8 @@ const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
           onChange={handleInputChanged}
         />
       </label>
+    </div>
+    {errorAlert <= 0 ? "Enter a valid number" : null}
     </div>
   );
 };
