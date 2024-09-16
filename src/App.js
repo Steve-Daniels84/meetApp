@@ -11,7 +11,7 @@ const App = () => {
   const [currentNOE, setCurrentNOE] = useState(25);
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
-  const [errorAlert, setErrorAlert] = useState("");
+  const [errorAlert, setErrorAlert] = useState("No error");
 
 
 

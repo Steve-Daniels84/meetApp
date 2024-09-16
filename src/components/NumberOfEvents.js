@@ -9,19 +9,19 @@ const NumberOfEvents = ({ setCurrentNOE, setErrorAlert, errorAlert }) => {
       setErrorAlert(value);
       setNumber(value);
       setCurrentNOE(value);
-    
   };
 
   return (
     <div>
     <div id="numberOfEvents">
-      <label htmlFor="number" id="number">
+      <label htmlFor="number-input" id="number">
         Number of Events:
         <input
           type="text"
           className="number"
           value={number}
           onChange={handleInputChanged}
+          id="number-input"
         />
       </label>
     </div>
