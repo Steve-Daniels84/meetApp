@@ -4,6 +4,7 @@ import EventList from './components/EventList';
 import CitySearch from './components/city-search';
 import NumberOfEvents from './components/NumberOfEvents';
 import { extractLocations, getEvents } from '../src/api';
+import './App.css';
 
 const App = () => {
   const [events, setEvents] = useState([]);

@@ -1,8 +1,40 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
 import Event from "../components/Event";
 import userEvent from "@testing-library/user-event";
 import mockData from "../mock-data";
+
+global.MutationObserver = class {
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe() {}
+  disconnect() {}
+};
+
+const formatDateTime = (dateTime, locale = "en-US") => {
+  if (!dateTime) return "Date and time not available";
+
+  const date = new Date(dateTime);
+
+  const dateOptions = {
+    weekday: "long", // e.g., 'Wednesday'
+    day: "2-digit", // e.g., '20'
+    month: "long", // e.g., 'May'
+    year: "numeric", // e.g., '2020'
+  };
+
+  const timeOptions = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+
+  const formattedDate = date.toLocaleDateString(locale, dateOptions);
+  const formattedTime = date.toLocaleTimeString(locale, timeOptions);
+
+  return `${formattedDate} at ${formattedTime}`;
+};
 
 describe("<Event /> component", () => {
   let EventComponent;
@@ -17,10 +49,14 @@ describe("<Event /> component", () => {
     expect(EventComponent.queryByText(event.location)).toBeInTheDocument();
   });
 
-  test("renders event start time", () => {
-    expect(
-      EventComponent.queryByText(event.start?.dateTime)
-    ).toBeInTheDocument();
+  test("renders event start time", async () => {
+    const formattedStartDateTime = formatDateTime(event.start?.dateTime);
+
+    waitFor(() => {
+      expect(
+        EventComponent.queryByText(formattedStartDateTime)
+      ).toBeInTheDocument();
+    });
   });
 
   test("renders event title", () => {

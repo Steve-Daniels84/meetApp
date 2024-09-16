@@ -3,9 +3,11 @@ import Event from "./Event";
 
 const EventList = ({events, index}) => {
     return (
-        <ul id="event-list">
+        <div id="eventsList">
+        <ul className="event-list" id="event-list">
               {events? events.map(event => <Event key={event.id} event={event} />) : null}
         </ul>
+        </div>
     );
   }
   
