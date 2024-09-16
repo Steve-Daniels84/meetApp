@@ -31,7 +31,6 @@ const App = () => {
 
   return (
     <div className="App">
-
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
       <NumberOfEvents setCurrentNOE={setCurrentNOE} setErrorAlert={setErrorAlert} errorAlert={errorAlert}/>
       <EventList events={events} />

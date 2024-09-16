@@ -4,7 +4,7 @@ import { useState } from "react";
 const Event = ({event}) => {
     const [showDetails, setShowDetails] = useState(false);
     return (
-        <li>
+        <li id="event">
             <p>{event.summary}</p>
            
             <p>{event.start?.dateTime}</p>
