@@ -20,7 +20,6 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
 
   const handleItemClicked = (event) => {
     const value = event.target.textContent;
-    console.log(value)
     if (value === "See all cities") {
       setSuggestions(allLocations);
       setQuery(value);
