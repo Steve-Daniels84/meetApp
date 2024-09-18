@@ -27,7 +27,6 @@ defineFeature(feature, (test) => {
     );
 
     when("the user views the event list", () => {
-      AppComponent = render(<App />);
     });
 
     then("25 events should be displayed by default", async () => {

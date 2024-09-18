@@ -5,7 +5,7 @@ Feature: Show Hide Event Details
   Then each event element should be collapsed by default
  Scenario: User can expand an event to see details
   Given the user is viewing a collapsed event
-  When the user clicks on the event
+  When the user clicks on the show event
   Then the event should expand to show its details
  Scenario: User can collapse an event to hide details
   Given the user is viewing an expanded event
