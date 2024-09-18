@@ -10,7 +10,6 @@ let NumberOfEventsComponent;
 let AppDOM;
 
 defineFeature(feature, (test) => {
-
   beforeEach(() => {
     AppComponent = render(<App />);
     AppDOM = AppComponent.container.firstChild;
@@ -26,8 +25,7 @@ defineFeature(feature, (test) => {
       () => {}
     );
 
-    when("the user views the event list", () => {
-    });
+    when("the user views the event list", () => {});
 
     then("25 events should be displayed by default", async () => {
       const EventListDom = AppDOM.querySelector("#event-list");
@@ -45,31 +43,30 @@ defineFeature(feature, (test) => {
     when,
     then,
   }) => {
-
-    given("the user is on the event settings page", () => {
-    });
+    given("the user is on the event settings page", () => {});
 
     and("the number of events input is rendered", async () => {
       waitFor(() => {
         NumberOfEventsComponent = AppDOM.querySelector("#numberOfEvents");
         expect(NumberOfEventsComponent).toBeInTheDocument();
-      })
+      });
     });
 
     when("the user specifies a number of events to display", async () => {
       const user = userEvent.setup();
       const numberInput = AppDOM.querySelector("#number-input");
       await user.type(numberInput, "{backspace}{backspace}10");
-      expect(numberInput.value).toEqual("10")
+      expect(numberInput.value).toEqual("10");
     });
 
     then(
       "the event list should update to show the specified number of events",
       async () => {
-        const eventsList = AppDOM.querySelector('#event-list');
-        const events = eventsList.querySelectorAll('#event');
+        const eventsList = AppDOM.querySelector("#event-list");
+        const events = eventsList.querySelectorAll("#event");
 
-        expect(events.length).toEqual(10)
-      });
+        expect(events.length).toEqual(10);
+      }
+    );
   });
 });
