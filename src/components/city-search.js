@@ -1,7 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { InfoAlert } from "./Alert";
 
-const CitySearch = ({ allLocations, setCurrentCity }) => {
+const CitySearch = ({
+  allLocations,
+  setCurrentCity,
+  infoAlert,
+  setInfoAlert,
+}) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -14,6 +20,15 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         })
       : [];
 
+    let infoText;
+
+    if (filteredLocations.length === 0) {
+      infoText = "No cities found with that name please try again!";
+    } else {
+      infoText = "";
+    }
+
+    setInfoAlert(infoText);
     setQuery(value);
     setSuggestions(filteredLocations);
   };
@@ -25,6 +40,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
       setQuery(value);
       setShowSuggestions(false);
       setCurrentCity(value);
+      setInfoAlert("");
     } else {
       setQuery(value);
       setShowSuggestions(false);
@@ -49,6 +65,11 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputchanged}
       />
+      <div className="alerts-container">
+        {infoAlert && infoAlert.length > 0 ? (
+          <InfoAlert text={infoAlert} />
+        ) : null}
+      </div>
       {showSuggestions ? (
         <div>
           <ul className="suggestions">

@@ -12,6 +12,7 @@ const App = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [errorAlert, setErrorAlert] = useState("No error");
+  const [infoAlert, setInfoAlert] = useState("");
 
 
 
@@ -33,7 +34,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
+      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} infoAlert={infoAlert} setInfoAlert={setInfoAlert} />
       <NumberOfEvents setCurrentNOE={setCurrentNOE} setErrorAlert={setErrorAlert} errorAlert={errorAlert}/>
       <EventList events={events} />
     </div>

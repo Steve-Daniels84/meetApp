@@ -15,7 +15,14 @@ global.MutationObserver = class {
 describe("<CitySearch /> component", () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]}/>);
+    CitySearchComponent = render(
+      <CitySearch
+        allLocations={[]}
+        setCurrentCity={[]}
+        infoAlert={[]}
+        setInfoAlert={() => {}}
+      />
+    );
   });
 
   test("renders text input", () => {
@@ -44,7 +51,16 @@ describe("<CitySearch /> component", () => {
     const allLocations = extractLocations(allEvents);
 
     // Re-render CitySearch component with allLocations
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}/>);
+    await waitFor(() => {
+      CitySearchComponent.rerender(
+        <CitySearch
+          allLocations={allLocations}
+          setCurrentCity={[]}
+          infoAlert={[]}
+          setInfoAlert={() => {}}
+        />
+      );
+    });
 
     // Get city text box element
     const cityTextBox = CitySearchComponent.getByRole("textbox");
@@ -90,7 +106,14 @@ describe("<CitySearch /> component", () => {
     // Create a mock function for setCurrentCity
     const mockSetCurrentCity = jest.fn();
 
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} setCurrentCity={mockSetCurrentCity}/>);
+    CitySearchComponent.rerender(
+      <CitySearch
+        allLocations={allLocations}
+        setCurrentCity={mockSetCurrentCity}
+        infoAlert={[]}
+        setInfoAlert={() => {}}
+      />
+    );
 
     // Simulate user input in the textbox
     const cityTextBox = CitySearchComponent.getByRole("textbox");
@@ -128,7 +151,8 @@ describe("<CitySearch /> Integration", () => {
 
     await waitFor(() => {
       fireEvent.focus(cityTextBox);
-      const suggestionListItems = within(CitySearchDom).queryAllByRole("listitem");
+      const suggestionListItems =
+        within(CitySearchDom).queryAllByRole("listitem");
       expect(suggestionListItems.length).toBe(allLocations.length + 1);
     });
   });
