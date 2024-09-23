@@ -40,9 +40,12 @@ const App = () => {
 
   return (
     <div className="App">
-      {warningAlert && warningAlert.length > 0 ? (
-        <WarningAlert text={warningAlert} />
-      ) : null}
+      <div className="alerts-container">
+        {warningAlert && warningAlert.length > 0 ? (
+          <WarningAlert text={warningAlert} />
+        ) : null}
+      </div>
+
       <CitySearch
         allLocations={allLocations}
         setCurrentCity={setCurrentCity}
