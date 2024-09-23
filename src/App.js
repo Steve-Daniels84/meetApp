@@ -5,6 +5,7 @@ import CitySearch from './components/city-search';
 import NumberOfEvents from './components/NumberOfEvents';
 import { extractLocations, getEvents } from '../src/api';
 import './App.css';
+import { WarningAlert } from './components/Alert';
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -13,6 +14,7 @@ const App = () => {
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [errorAlert, setErrorAlert] = useState("");
   const [infoAlert, setInfoAlert] = useState("");
+  const [WarningAlert, setWarningAlert] = useState("");
 
 
 
@@ -28,6 +30,13 @@ const App = () => {
   }, [currentCity, currentNOE]);
 
   useEffect(() => {
+
+    if (navigator.onLine) {
+      setWarningAlert("");
+    } else {
+      setWarningAlert("Offline mode enabled");
+    }
+
     fetchData();
   }, [fetchData]);
   
