@@ -46,20 +46,24 @@ const App = () => {
           <WarningAlert text={warningAlert} />
         ) : null}
       </div>
+      <div className="header">
+        <CitySearch
+          allLocations={allLocations}
+          setCurrentCity={setCurrentCity}
+          infoAlert={infoAlert}
+          setInfoAlert={setInfoAlert}
+        />
+        <NumberOfEvents
+          setCurrentNOE={setCurrentNOE}
+          setErrorAlert={setErrorAlert}
+          errorAlert={errorAlert}
+        />
+      </div>
 
-      <CitySearch
-        allLocations={allLocations}
-        setCurrentCity={setCurrentCity}
-        infoAlert={infoAlert}
-        setInfoAlert={setInfoAlert}
-      />
-      <NumberOfEvents
-        setCurrentNOE={setCurrentNOE}
-        setErrorAlert={setErrorAlert}
-        errorAlert={errorAlert}
-      />
-      <CityEventsChart allLocations={allLocations} events={events}/>
-      <EventList events={events} />
+      <CityEventsChart allLocations={allLocations} events={events} />
+      <div className="body">
+        <EventList events={events} />
+      </div>
     </div>
   );
 };
