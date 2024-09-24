@@ -26,9 +26,9 @@ const CityEventsChart = ({ allLocations, events }) => {
       return data;
     };
 
-    setData(getData()); // Call the function here
+    setData(getData()); 
 
-  }, [allLocations, events]); // Only run when `allLocations` or `events` change
+  }, [allLocations, events]);
 
   return (
     <ResponsiveContainer width="99%" height={400}>
