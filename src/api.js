@@ -8,6 +8,7 @@ export const extractLocations = (events) => {
   return locations;
 };
 
+
 export const getAccessToken = async () => {
   const accessToken = localStorage.getItem('access_token');
   const tokenCheck = accessToken && (await checkToken(accessToken));
