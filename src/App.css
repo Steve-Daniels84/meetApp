@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -40,11 +36,19 @@
 .App {
   width: 100vw;
   height: 100vh;
+  text-align: center;
 }
 
 .event-list {
   border: 1px solid black;
   width: 100%;
+  height: 75vh;
+  overflow: hidden scroll;
+}
+
+#event-list {
+  width: 100%;
+  height: 75vh;
 }
 
 ul {
