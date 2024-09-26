@@ -90,7 +90,7 @@ align-content: center;
 }
 
 .charts{
-  height: 200px;
+  border-radius: 10px;
 }
 
 .body {
@@ -102,4 +102,15 @@ align-content: center;
 .chart-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+
+  .chart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  
 }
